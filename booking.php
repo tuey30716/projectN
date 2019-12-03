@@ -28,9 +28,37 @@ function startbooking()
         }
     }
     
+    while(1)
+    {
+        echo "\n\tBooking Date(dd/mm/yyyy): ";
+        $bdate=trim(fgets(STDIN));
+        $getdate=explode("/",$bdate);
+        $now       = new DateTime();
 
-    echo "\n\tBooking Date(dd/mm/yyyy): ";
-    $bdate=trim(fgets(STDIN));
+            if(!isset($getdate[0])&&!isset($getdate[1])&&!isset($getdate[2]))
+            {
+                $getdate[0]='0';
+                $getdate[1]='0';
+                $getdate[2]='0';
+            }
+            elseif(isset($getdate[0])&&isset($getdate[1])&&isset($getdate[2]))
+            {
+                $user_date = DateTime::createFromFormat('d/m/Y', $bdate);
+            if(checkdate($getdate[0], $getdate[1], $getdate[2])&&$user_date>=$now){
+                    break;
+            }
+            else {
+                echo "\n\tInvalid Date !!\n\tPlease Input New Date\n";
+            }
+            }
+            else 
+            {
+                echo "\n\tInvalid Date !!\n\tPlease Input New Date\n";
+            }
+    }
+
+
+
     echo "\n\tBooking Time(hr:mn)     : ";
     $btime=trim(fgets(STDIN));
 
