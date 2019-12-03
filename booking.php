@@ -58,9 +58,37 @@ function startbooking()
     }
 
 
-
+    while(1)
+    {
     echo "\n\tBooking Time(hr:mn)     : ";
     $btime=trim(fgets(STDIN));
+    $gettime=explode(":",$btime);
+    if(!isset($gettime[0])&&!isset($gettime[1]))
+            {
+                $gettime[0]='25';
+                $gettime[1]='0';
+            }
+            elseif(isset($gettime[0])&&isset($gettime[1]))
+            {
+                
+                if(checktime($gettime[0], $gettime[1]))
+                {
+                    break;
+                }
+                else 
+                {
+                    echo "\n\tInvalid Time !!\n\tPlease Input New Time\n";
+                }
+            }
+            else 
+            {
+                echo "\n\tInvalid Time !!\n\tPlease Input New Time\n";
+            }
+    }
+
+
+
+
 
     while(1){
         echo "\n\tDiscount Code(if have)  : ";
@@ -82,9 +110,18 @@ function startbooking()
     }
     
 
-
+    while(1){
     echo "\n\tInput Number Of Food    : ";
     fscanf(STDIN,"%d",$foodnum);
+        if(is_numeric($foodnum)){
+        break;
+        }
+        else
+        {
+            echo "\n\tInvalid Number of Food !!\n\tPlease Input Only Number\n  ";
+        }
+    }
+
     echo "\n\tInput (h) if you want to see food list\n";
     $j=0;
     $subtotal=0;
@@ -160,7 +197,7 @@ function startbooking()
         showsummary($inputFileName);
 }
 
-
+//show summary
 function showsummary($inputFileName)
 {   
     $inputFileType = 'xlsx';
@@ -205,8 +242,17 @@ function showsummary($inputFileName)
 
 
 
-
-
+//check time format
+function checktime($hour, $min) {
+    if ($hour < 0 || $hour > 23 || !is_numeric($hour)) {
+        return false;
+    }
+    if ($min < 0 || $min > 59 || !is_numeric($min)) {
+        return false;
+    }
+    
+    return true;
+}
 
 
 //In_array for 2d array---------------------------------------------------------------
