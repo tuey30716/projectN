@@ -44,16 +44,16 @@ function startbooking()
             elseif(isset($getdate[0])&&isset($getdate[1])&&isset($getdate[2]))
             {
                 $user_date = DateTime::createFromFormat('d/m/Y', $bdate);
-            if(checkdate($getdate[0], $getdate[1], $getdate[2])&&$user_date>=$now){
+            if(checkdate($getdate[1], $getdate[0], $getdate[2])&&$user_date>=$now){
                     break;
             }
             else {
-                echo "\n\tInvalid Date !!\n\tPlease Input New Date\n";
+                echo "\n\tInvalid Date !!\n\tPlease Input New Date!\n";
             }
             }
             else 
             {
-                echo "\n\tInvalid Date !!\n\tPlease Input New Date\n";
+                echo "\n\tInvalid Date !!\n\tPlease Input New Date!!\n";
             }
     }
 
